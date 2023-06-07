@@ -26,7 +26,7 @@ async def start(client, message):
             result = mycol.find_one({"_id": uid})
             if result is None:
                 ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 120)}")
-                ad_url = shorten_url(f"https://telegram.me/{U_NAME}?start={ad_code}")
+                ad_url = shorten_url(f"https://telegram.me/{SESSION}?start={ad_code}")
                 app.send_message(
                     message.chat.id,
                     f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 12 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 12 hour after passing the ad.",
@@ -81,7 +81,7 @@ async def start(client, message):
                         return
                     except BaseException:
                         ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 120)}")
-                        ad_url = shorten_url(f"https://telegram.me/{U_NAME}?start={ad_code}")
+                        ad_url = shorten_url(f"https://telegram.me/{SESSION}?start={ad_code}")
                         app.send_message(
                             message.chat.id,
                             f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 12 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 12 hour after passing the ad.",
@@ -90,7 +90,7 @@ async def start(client, message):
                                     [
                                         InlineKeyboardButton(
                                             "Click Here To Refresh Token",
-                                            url=f"https://telegram.me/{U_NAME}?start={ad_code}",
+                                            url=f"https://telegram.me/{SESSION}?start={ad_code}",
                                         )
                                     ]
                                 ]
@@ -100,7 +100,7 @@ async def start(client, message):
                         return
                 else:
                     ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 120)}")
-                    ad_url = shorten_url(f"https://telegram.me/{U_NAME}?start={ad_code}")
+                    ad_url = shorten_url(f"https://telegram.me/{SESSION}?start={ad_code}")
                     app.send_message(
                         message.chat.id,
                         f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 12 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 12 hour after passing the ad.",
@@ -109,7 +109,7 @@ async def start(client, message):
                                 [
                                     InlineKeyboardButton(
                                         "Click Here To Refresh Token",
-                                        url=f"https://telegram.me/{U_NAME}?start={ad_code}",
+                                        url=f"https://telegram.me/{SESSION}?start={ad_code}",
                                     )
                                 ]
                             ]
