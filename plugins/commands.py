@@ -42,7 +42,7 @@ async def start(client, message):
     if message.chat.id == message.from_user.id :
         uid = message.from_user.id
         if uid not in ADMINS:
-            result = mycol.find_one({"_id": uid})
+            result = mycol.find_one({"id": uid})
             if result is None:
                 ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 120)}")
                 ad_url = await shorten_url(f"https://telegram.me/{SESSION}?start={ad_code}")
@@ -89,7 +89,7 @@ async def start(client, message):
                             )
                             return
                         mycol.update_one(
-                            {"_id": user_id},
+                            {"id": user_id},
                             {"$set": {"time_out": int(ad_msg.split(":")[1])}}, upsert=True
                         )
                         await client.send_message(
