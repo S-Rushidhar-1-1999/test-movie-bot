@@ -401,12 +401,12 @@ def get_readable_time(seconds):
     dt = datetime.fromtimestamp(int(seconds))
     return dt.strftime('%Y-%m-%d %H:%M:%S')
 
-async def get_shortlink(link):
+async def shorten_url(link):
     https = link.split(":")[0]
     if "http" == https:
         https = "https"
         link = link.replace("http", https)
-    url = f'https://OmegaLinks.in/api'
+    url = f'https://omegalinks.in/api'
     params = {'api': URL_SHORTNER_WEBSITE_API,
               'url': link,
               }
