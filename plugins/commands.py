@@ -22,7 +22,7 @@ BATCH_FILES = {}
 async def start(client, message):
     if message.chat.id == message.from_user.id :
         uid = message.from_user.id
-        if uid not in ADMIN_LIST:
+        if uid not in ADMINS:
             result = mycol.find_one({"_id": uid})
             if result is None:
                 ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 120)}")
