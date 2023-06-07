@@ -9,8 +9,8 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
 from info import *
-from utils import get_settings, get_size, is_subscribed, save_group_settings, temp
-from database.connections_mdb import active_connection
+from utils import get_settings, get_size, is_subscribed, save_group_settings, temp, str_to_b64, b64_to_str, get_current_time, get_readable_time, shorten_url
+from database.connections_mdb import active_connection, mycol
 import re
 import json
 import base64
