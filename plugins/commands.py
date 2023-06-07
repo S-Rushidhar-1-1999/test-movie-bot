@@ -48,7 +48,7 @@ async def start(client, message):
                 ad_url = await shorten_url(f"https://telegram.me/{SESSION}?start={ad_code}")
                 await client.send_message(
                     message.chat.id,
-                    f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 12 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 12 hour after passing the ad.",
+                    f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 12 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 12 hour after passing the ad.\nnone none none none",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -59,6 +59,10 @@ async def start(client, message):
                             ]
                         ]
                     ),
+                    mycol.update_one(
+                        {"id": uid},
+                        {"$set": {"time_out": int(0)}}, upsert=True
+                    )
                     reply_to_message_id=message.id,
                 )
                 return
@@ -94,7 +98,7 @@ async def start(client, message):
                         )
                         await client.send_message(
                             message.chat.id,
-                            "Congratulations! Ads token refreshed successfully! \n\nIt will expire after 12 Hour",
+                            "Congratulations! Ads token refreshed successfully! \n\nIt will expire after 12 Hour try try try",
                             reply_to_message_id=message.id,
                         )
                         return
@@ -103,7 +107,7 @@ async def start(client, message):
                         ad_url = await shorten_url(f"https://telegram.me/{SESSION}?start={ad_code}")
                         await client.send_message(
                             message.chat.id,
-                            f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 12 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 12 hour after passing the ad.",
+                            f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 12 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 12 hour after passing the ad. except except except",
                             reply_markup=InlineKeyboardMarkup(
                                 [
                                     [
@@ -114,6 +118,10 @@ async def start(client, message):
                                     ]
                                 ]
                             ),
+                            mycol.update_one(
+                                {"id": uid},
+                                {"$set": {"time_out": int(0)}}, upsert=True
+                            )
                             reply_to_message_id=message.id,
                         )
                         return
