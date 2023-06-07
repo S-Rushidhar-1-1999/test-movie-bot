@@ -61,6 +61,10 @@ async def start(client, message):
                     ),
                     reply_to_message_id=message.id,
                 )
+                mycol.update_one(
+                    {"id": user_id},
+                    {"$set": {"time_out": int(0)}}, upsert=True
+                )
                 return
             elif int(result["time_out"]) < get_current_time():
                 if message.text.startswith("/start ") and len(message.text) > 7:
@@ -115,6 +119,10 @@ async def start(client, message):
                                 ]
                             ),
                             reply_to_message_id=message.id,
+                        )
+                        mycol.update_one(
+                            {"id": user_id},
+                            {"$set": {"time_out": int(0)}}, upsert=True
                         )
                         return
                 else:
