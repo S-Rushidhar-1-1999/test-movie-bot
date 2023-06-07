@@ -44,17 +44,17 @@ async def start(client, message):
         if uid not in ADMINS:
             result = mycol.find_one({"id": uid})
             if result is None:
-                ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 120)}")
+                ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 3600)}")
                 ad_url = await shorten_url(f"https://telegram.me/{SESSION}?start={ad_code}")
                 await client.send_message(
                     message.chat.id,
-                    f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 12 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 12 hour after passing the ad.\nnone none none none",
+                    f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 1 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 1 hour after passing the ad.",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
                                 InlineKeyboardButton(
                                     "Click Here To Refresh Token",
-                                    url=ad_url,
+                                    url=str(ad_url).replace("mdisk.pro", "Mdisk.Pro"),
                                 )
                             ]
                         ]
@@ -63,7 +63,7 @@ async def start(client, message):
                 )
                 mycol.update_one(
                     {"id": uid},
-                    {"$set": {"time_out": int(0)}}, upsert=True
+                    {"$set": {"time_out": get_current_time()}}, upsert=True
                 )
                 return
             elif int(result["time_out"]) < get_current_time():
@@ -85,7 +85,7 @@ async def start(client, message):
                                 reply_to_message_id=message.id,
                             )
                             return
-                        if int(ad_msg.split(":")[1]) > int(get_current_time() + 120):
+                        if int(ad_msg.split(":")[1]) > int(get_current_time() + 3600):
                             await client.send_message(
                                 message.chat.id,
                                 "Dont Try To Be Over Smart",
@@ -98,22 +98,22 @@ async def start(client, message):
                         )
                         await client.send_message(
                             message.chat.id,
-                            "Congratulations! Ads token refreshed successfully! \n\nIt will expire after 12 Hour try try try",
+                            "Congratulations! Ads token refreshed successfully! \n\nIt will expire after 1 Hour.",
                             reply_to_message_id=message.id,
                         )
                         return
                     except BaseException:
-                        ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 120)}")
+                        ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 3600)}")
                         ad_url = await shorten_url(f"https://telegram.me/{SESSION}?start={ad_code}")
                         await client.send_message(
                             message.chat.id,
-                            f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 12 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 12 hour after passing the ad. except except except",
+                            f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 1 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 1 hour after passing the ad.",
                             reply_markup=InlineKeyboardMarkup(
                                 [
                                     [
                                         InlineKeyboardButton(
                                             "Click Here To Refresh Token",
-                                            url=ad_url,
+                                            url=str(ad_url).replace("mdisk.pro", "Mdisk.Pro"),
                                         )
                                     ]
                                 ]
@@ -122,21 +122,21 @@ async def start(client, message):
                         )
                         mycol.update_one(
                             {"id": uid},
-                            {"$set": {"time_out": int(0)}}, upsert=True
+                            {"$set": {"time_out": get_current_time()}}, upsert=True
                         )
                         return
                 else:
-                    ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 120)}")
+                    ad_code = str_to_b64(f"{uid}:{str(get_current_time() + 3600)}")
                     ad_url = await shorten_url(f"https://telegram.me/{SESSION}?start={ad_code}")
                     await client.send_message(
                         message.chat.id,
-                        f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 12 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 12 hour after passing the ad. else else else",
+                        f"Hey **{message.from_user.mention}** \n\nYour Ads token is expired, refresh your token and try again. \n\n**Token Timeout:** 1 hour \n\n**What is token?** \nThis is an ads token. If you pass 1 ad, you can use the bot for 1 hour after passing the ad.",
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [
                                     InlineKeyboardButton(
                                         "Click Here To Refresh Token",
-                                        url=ad_url,
+                                        url=str(ad_url).replace("mdisk.pro", "Mdisk.Pro"),
                                     )
                                 ]
                             ]
@@ -145,7 +145,7 @@ async def start(client, message):
                     )
                     mycol.update_one(
                         {"id": uid},
-                        {"$set": {"time_out": int(0)}}, upsert=True
+                        {"$set": {"time_out": get_current_time()}}, upsert=True
                     )
                     return
     if len(message.command) != 2:
