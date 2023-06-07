@@ -73,7 +73,7 @@ async def start(client, message):
                             {"_id": user_id},
                             {"$set": {"time_out": int(ad_msg.split(":")[1])}}, upsert=True
                         )
-                        await app.send_message(
+                        await client.send_message(
                             message.chat.id,
                             "Congratulations! Ads token refreshed successfully! \n\nIt will expire after 12 Hour",
                             reply_to_message_id=message.id,
