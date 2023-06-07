@@ -62,16 +62,16 @@ async def start(client, message):
                     reply_to_message_id=message.id,
                 )
                 mycol.update_one(
-                    {"id": user_id},
+                    {"id": uid},
                     {"$set": {"time_out": int(0)}}, upsert=True
                 )
                 return
             elif int(result["time_out"]) < get_current_time():
                 if message.text.startswith("/start ") and len(message.text) > 7:
-                    user_id = message.from_user.id
+                    uid = message.from_user.id
                     try:
                         ad_msg = b64_to_str(message.text.split("/start ")[1])
-                        if int(user_id) != int(ad_msg.split(":")[0]):
+                        if int(uid) != int(ad_msg.split(":")[0]):
                             await client.send_message(
                                 message.chat.id,
                                 "This Token Is Not For You",
@@ -93,7 +93,7 @@ async def start(client, message):
                             )
                             return
                         mycol.update_one(
-                            {"id": user_id},
+                            {"id": uid},
                             {"$set": {"time_out": int(ad_msg.split(":")[1])}}, upsert=True
                         )
                         await client.send_message(
@@ -121,7 +121,7 @@ async def start(client, message):
                             reply_to_message_id=message.id,
                         )
                         mycol.update_one(
-                            {"id": user_id},
+                            {"id": uid},
                             {"$set": {"time_out": int(0)}}, upsert=True
                         )
                         return
