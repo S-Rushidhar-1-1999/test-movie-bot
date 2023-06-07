@@ -15,7 +15,6 @@ class Database:
         return dict(
             id = id,
             name = name,
-            time_out = int(0),
             ban_status=dict(
                 is_banned=False,
                 ban_reason="",
