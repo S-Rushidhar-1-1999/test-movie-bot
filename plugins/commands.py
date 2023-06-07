@@ -59,11 +59,11 @@ async def start(client, message):
                             ]
                         ]
                     ),
+                reply_to_message_id=message.id,
+                )
                 mycol.update_one(
                     {"id": uid},
                     {"$set": {"time_out": int(0)}}, upsert=True
-                )
-                reply_to_message_id=message.id,
                 )
                 return
             elif int(result["time_out"]) < get_current_time():
@@ -118,11 +118,11 @@ async def start(client, message):
                                     ]
                                 ]
                             ),
+                            reply_to_message_id=message.id,
+                        )
                         mycol.update_one(
                             {"id": uid},
                             {"$set": {"time_out": int(0)}}, upsert=True
-                        )
-                            reply_to_message_id=message.id,
                         )
                         return
                 else:
@@ -142,6 +142,10 @@ async def start(client, message):
                             ]
                         ),
                         reply_to_message_id=message.id,
+                    )
+                    mycol.update_one(
+                        {"id": uid},
+                        {"$set": {"time_out": int(0)}}, upsert=True
                     )
                     return
     if len(message.command) != 2:
